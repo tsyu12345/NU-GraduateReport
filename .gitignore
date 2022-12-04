@@ -1,0 +1,9 @@
+.venv
+TEST
+*.zip
+*.exe
+ml-agents-release_20
+1on1FlagGame/My project/*
+!1on1FlagGame/My project/Assets
+!1on1FlagGame/My project/ProjectSettings
+!1on1FlagGame/My project/UnityPackageManager
