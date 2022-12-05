@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoliceAgent1 : MonoBehaviour
+public class PoliceAgent : MonoBehaviour
 {
     private Rigidbody rb;
     private float speed = 30f;
@@ -14,12 +14,13 @@ public class PoliceAgent1 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb.velocity.magnitude < 10)
-        {
-            //指定したスピードから現在の速度を引いて加速力を求める
-            float currentSpeed = speed - rb.velocity.magnitude;
-            //調整された加速力で力を加える
-            rb.AddForce(new Vector3(0, 0, currentSpeed));
-        }
+    }
+
+    //ランダムな方向に移動する。
+    void randomMove() {
+        float x = Random.Range(-1f, 1f);
+        float z = Random.Range(-1f, 1f);
+        Vector3 direction = new Vector3(x, 0, z);
+        rb.AddForce(direction * speed);
     }
 }

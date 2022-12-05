@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5344043379344319253}
   - component: {fileID: 5344043379344319252}
   - component: {fileID: 5344043379344319255}
+  - component: {fileID: -1096706045183458142}
+  - component: {fileID: 4151195099205646984}
   m_Layer: 0
   m_Name: PoliceAgt
   m_TagString: Untagged
@@ -115,3 +117,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-1096706045183458142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5344043379344319254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da59e5d89dc0da34795efbcb2db30523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4151195099205646984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5344043379344319254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc06f6c790f6edf4db25b158ebd1e506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
