@@ -16,6 +16,10 @@ public class PoliceAgent : Agent
     }
 
     public Transform Target;
+
+    /*
+        シーンの初期化を行う（ランダムにターゲットを設置するなど）
+    */
     public override void OnEpisodeBegin()
     {
         // If the Agent fell, zero its momentum
@@ -30,6 +34,9 @@ public class PoliceAgent : Agent
         Target.localPosition = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
     }
 
+    /**
+     * 環境の情報の収集を行う（ターゲットの位置、エージェント自体の位置および速度など）
+     */
     public override void CollectObservations(VectorSensor sensor)
     {
         // Target and Agent positions
@@ -42,6 +49,10 @@ public class PoliceAgent : Agent
     }
 
     public float forceMultiplier = 10;
+
+    /**
+     * 行った行動による報酬の決定など
+    */
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         // Actions, size = 2
