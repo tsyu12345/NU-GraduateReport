@@ -4,6 +4,12 @@ TEST
 *.exe
 ml-agents-release_20
 1on1FlagGame/My project/*
+1on1FlagGame/1on1DoroK-MLTEST1/*
+!1on1FlagGame/1on1DoroK-MLTEST1/Assets
+!1on1FlagGame/1on1DoroK-MLTEST1/ProjectSettings
+!1on1FlagGame/1on1DoroK-MLTEST1/UnityPackageManager
+!1on1FlagGame/1on1DoroK-MLTEST1/config
+!1on1FlagGame/1on1DoroK-MLTEST1/results
 !1on1FlagGame/My project/Assets
 !1on1FlagGame/My project/ProjectSettings
 !1on1FlagGame/My project/UnityPackageManager

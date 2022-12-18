@@ -65,15 +65,10 @@ public class PoliceAgent : Agent
         float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
 
         // Reached target
-        if (distanceToTarget < 1.42f)
-        {
+        if (distanceToTarget < 1.42f) {
             SetReward(1.0f);
             EndEpisode();
-        }
-
-        // Fell off platform
-        else if (this.transform.localPosition.y < 0)
-        {
+        } else if (this.transform.localPosition.y < 0) { // Fell off platform
             EndEpisode();
         }
     }
