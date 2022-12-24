@@ -23,7 +23,7 @@ public class RunnerAgent : Agent
         }
 
         // Move the target to a new spot
-        Target.localPosition = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
+        //Target.localPosition = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -54,7 +54,6 @@ public class RunnerAgent : Agent
             SetReward(1.0f);
             //EndEpisode();
         } else if( distanceToTarget < 1.42f) {// arrested by police
-            print("arrested by police");
             print("arrested by police");
             SetReward(-1.0f);
             //フェールド内の特定の位置へ移動させ、エピソードを終了させる

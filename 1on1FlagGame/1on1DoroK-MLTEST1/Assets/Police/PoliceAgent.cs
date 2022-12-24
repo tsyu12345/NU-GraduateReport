@@ -15,6 +15,7 @@ public class PoliceAgent : Agent
     public Transform Target;
     public override void OnEpisodeBegin()
     {
+        print(Target);
         // If the Agent fell, zero its momentum
         if (this.transform.localPosition.y < 0)
         {
@@ -51,19 +52,12 @@ public class PoliceAgent : Agent
         float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
 
         // Reached target
+         // Reached target
         if (distanceToTarget < 1.42f)
         {
-            print("POLICE:caught the thief");
             SetReward(1.0f);
             EndEpisode();
-        } else {
-            SetReward(-1.0f);
-        }
-
-        // Fell off platform
-        if (this.transform.localPosition.y < 0)
-        {   
-            SetReward(-1.0f);
+        } else if (this.transform.localPosition.y < 0) {
             EndEpisode();
         }
     }
