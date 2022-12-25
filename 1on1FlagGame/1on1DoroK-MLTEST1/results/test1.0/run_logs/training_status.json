@@ -1,0 +1,30 @@
+{
+    "Dorok": {
+        "elo": 1200.0,
+        "checkpoints": [
+            {
+                "steps": 16300,
+                "file_path": "results\\test1.0\\Dorok\\Dorok-16300.onnx",
+                "reward": 0.0,
+                "creation_time": 1671983221.9815917,
+                "auxillary_file_paths": [
+                    "results\\test1.0\\Dorok\\Dorok-16300.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 16300,
+            "file_path": "results\\test1.0\\Dorok.onnx",
+            "reward": 0.0,
+            "creation_time": 1671983221.9815917,
+            "auxillary_file_paths": [
+                "results\\test1.0\\Dorok\\Dorok-16300.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.0+cu117"
+    }
+}
