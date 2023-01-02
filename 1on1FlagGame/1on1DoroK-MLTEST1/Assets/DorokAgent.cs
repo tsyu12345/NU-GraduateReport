@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
+using Unity.MLAgents.Sensors;
 
 public enum Team {
     Police = 0,
@@ -11,7 +12,7 @@ public enum Team {
 
 public class DorokAgent: Agent {
 
-
+    EnvController envController;
     [HideInInspector]
     public Team team;
 
@@ -24,9 +25,12 @@ public class DorokAgent: Agent {
 
     EnvironmentParameters m_ResetParams;
 
-
+    /**
+    エージェントの初期化
+    */
     public override void Initialize() {
-        EnvCtrler envController = GetComponentInParent<EnvCtrler>();
+        
+        envController = GetComponentInParent<EnvController>();
         m_BehaviorParameters = gameObject.GetComponent<BehaviorParameters>();
 
         if (m_BehaviorParameters.TeamId == (int)Team.Police) {
@@ -44,37 +48,77 @@ public class DorokAgent: Agent {
         agentRb.maxAngularVelocity = 500;
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
-    }
 
-
-    public void MoveAgent(ActionSegment<int> act) {
-        var dirToGo = Vector3.zero;
-        var rotateDir = Vector3.zero;
-
-
-        var forwardAxis = act[0];
-        var rightAxis = act[1];
-        var rotateAxis = act[2];
-
-
-        transform.Rotate(rotateDir, Time.deltaTime * 100f);
-        agentRb.AddForce(dirToGo * m_Settings.agentRunSpeed,ForceMode.VelocityChange);
+        print("Initialized Agent For Team: " + team + "");
     }
 
 
     /**
-    エージェントの行動による報酬の設定
+    環境の観測
+    */
+    public override void CollectObservations(VectorSensor sensor) {
+        // 自身の位置
+        sensor.AddObservation(agentRb.velocity.x);
+        sensor.AddObservation(agentRb.velocity.z);
+
+        // 敵エージェントの位置
+        var tagname = team == Team.Police ? "Criminer" : "Police";
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag(tagname);
+
+        foreach(GameObject enemy in enemys) {
+            sensor.AddObservation(enemy.transform.position.x);
+            sensor.AddObservation(enemy.transform.position.z);
+        }
+
+    }
+
+
+    /**
+    エージェントの行動による報酬の設定(報酬設計)
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
+        //Action size is 2
+        var actions = actionBuffers.ContinuousActions;
+        Vector3 controlSignal = Vector3.zero;
+        controlSignal.x = actions[0];
+        controlSignal.z = actions[1];
+        agentRb.AddForce(controlSignal * m_Settings.agentRunSpeed);
 
-        MoveAgent(actionBuffers.DiscreteActions);
+        //敵エージェントとの距離を算出
+        var tagname = team == Team.Police ? "Criminer" : "Police";
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag(tagname);
+        Vector3[] enemyPos = new Vector3[enemys.Length];
+        for (int i = 0; i < enemys.Length; i++) {
+            enemyPos[i] = enemys[i].transform.position;
+        }
+        var distanceToEnemy = Vector3.Distance(transform.position, enemyPos[0]);
+        
+        //敵エージェントとの距離が近いほど報酬を与える
+        AddReward(1f / distanceToEnemy);
+        //敵エージェントとの距離が遠いほど報酬を与える
+        AddReward(-1f / distanceToEnemy);
+        //警官が逃走役を捕まえたら報酬を与え,逃走役は報酬を引く。
+        if (distanceToEnemy < 1f) {
+            if (team == Team.Police) {
+                AddReward(1f);
+            } else {
+                AddReward(-1f);
+                //逃走役を初期位置にもどす。
+                transform.position = initialPos;
+            }
+            EndEpisode();
+        }
+
     }
 
     /**
-    シートの初期化
+    シーンの初期化
     */
     public override void OnEpisodeBegin() {
-        
+        // エージェントの初期位置を設定
+        transform.position = initialPos;
+        agentRb.velocity = Vector3.zero;
+        agentRb.angularVelocity = Vector3.zero;
     }
 
 }

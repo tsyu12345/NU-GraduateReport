@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PoliceAgent
+  - criminer
+  - Police
+  - Criminer
   layers:
   - Default
   - TransparentFX
