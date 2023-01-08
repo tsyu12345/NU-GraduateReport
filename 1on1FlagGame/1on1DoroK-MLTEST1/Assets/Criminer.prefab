@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5328072687207904485}
   - component: {fileID: 3207449124845663982}
   - component: {fileID: -9205368592350047722}
+  - component: {fileID: 1073170758137686035}
   m_Layer: 0
   m_Name: Criminer
   m_TagString: criminer
@@ -126,8 +127,8 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
-  TeamId: 0
+  m_BehaviorName: Criminer
+  TeamId: 1
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
@@ -196,3 +197,16 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
+--- !u!114 &1073170758137686035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304311807173814439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed50332fb803a134cb530daede0ba898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugCommandLineOverride: 

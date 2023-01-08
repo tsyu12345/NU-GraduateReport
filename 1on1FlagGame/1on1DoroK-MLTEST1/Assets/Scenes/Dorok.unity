@@ -437,7 +437,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75bece316fee2fe41a63c5b41d952203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AgentsList: []
+  AgentsList:
+  - Agent: {fileID: 3285954943722672616}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 5551987687881135783}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
   MaxEnvironmentSteps: 25000
 --- !u!4 &1021618441
 Transform:
@@ -463,6 +471,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1347205728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6191740779564238203, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+  m_PrefabInstance: {fileID: 5551987687881135782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1347205737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347205728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed50332fb803a134cb530daede0ba898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugCommandLineOverride: 
 --- !u!4 &1464346646 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5476586957720946163, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
@@ -774,6 +800,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Criminer
       objectReference: {fileID: 0}
+    - target: {fileID: 5328072687207904485, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
+      propertyPath: MaxStep
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 5476586957720946163, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -823,8 +853,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9120709768400422913, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
+      propertyPath: m_BehaviorName
+      value: Criminer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120709768400422913, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
       propertyPath: m_InferenceDevice
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9120709768400422913, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
       propertyPath: m_DeterministicInference
@@ -844,6 +878,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
+--- !u!1 &3285954943722672612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1304311807173814439, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
+  m_PrefabInstance: {fileID: 3285954943722672611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3285954943722672613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3285954943722672612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &3285954943722672616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5328072687207904485, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
+  m_PrefabInstance: {fileID: 3285954943722672611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3285954943722672612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce18a4948ca727b43a02d9643867afc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5551987687881135782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,6 +915,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1021618441}
     m_Modifications:
+    - target: {fileID: 1113970839827931846, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539278084541274088, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1539278084541274088, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.104713
@@ -879,13 +951,53 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Police
       objectReference: {fileID: 0}
-    - target: {fileID: 4093369590317185649, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
-      propertyPath: MaxStep
-      value: 0
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BehaviorName
+      value: Police
       objectReference: {fileID: 0}
     - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
       propertyPath: m_InferenceDevice
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093369590317185654, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[2]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6962164621249514508, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
       propertyPath: m_RootOrder
@@ -934,6 +1046,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6776861954429769492, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+--- !u!114 &5551987687881135783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3565775323993777239, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
+  m_PrefabInstance: {fileID: 5551987687881135782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347205728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce18a4948ca727b43a02d9643867afc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9162002843809837434
 PrefabInstance:
   m_ObjectHideFlags: 0

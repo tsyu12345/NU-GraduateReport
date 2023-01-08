@@ -19,15 +19,14 @@ public class EnvController : MonoBehaviour
         public Rigidbody Rb;
     }
 
+    //List of Agents On Platform
+    public List<PlayerInfo> AgentsList = new List<PlayerInfo>();
 
     /*警察グループ*/
     public SimpleMultiAgentGroup PoliceGroup;
     /*逃走者グループ*/
     public SimpleMultiAgentGroup CriminerGroup;
 
-
-    //List of Agents On Platform
-    public List<PlayerInfo> AgentsList = new List<PlayerInfo>();
 
     private int m_ResetTimer;
 
@@ -36,6 +35,8 @@ public class EnvController : MonoBehaviour
     void Start() {
         var PoliceCount = 0;
         var CriminerCount = 0;
+        print("TEAM OBJ");
+        print(Team.Police);
         m_DorokSettings = FindObjectOfType<DorokSettings>();
         // Initialize TeamManager
         PoliceGroup = new SimpleMultiAgentGroup();
@@ -43,6 +44,10 @@ public class EnvController : MonoBehaviour
         print("AgentsList Count: ");
         print(AgentsList);
         foreach (var item in AgentsList) {
+            print("for statemaents");
+            item.StartingPos = item.Agent.transform.position;
+            item.StartingRot = item.Agent.transform.rotation;
+            item.Rb = item.Agent.GetComponent<Rigidbody>();
             if (item.Agent.team == Team.Police) {
                 PoliceGroup.RegisterAgent(item.Agent);
                 PoliceCount++;

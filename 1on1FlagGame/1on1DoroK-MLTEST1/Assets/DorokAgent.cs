@@ -12,9 +12,10 @@ public enum Team {
 
 public class DorokAgent: Agent {
 
-    EnvController envController;
     [HideInInspector]
     public Team team;
+
+    float m_Existential;
 
     [HideInInspector]
     public Rigidbody agentRb;
@@ -30,7 +31,12 @@ public class DorokAgent: Agent {
     */
     public override void Initialize() {
         
-        envController = GetComponentInParent<EnvController>();
+        EnvController envController = GetComponentInParent<EnvController>();
+        if (envController != null) {
+            m_Existential = 1f / envController.MaxEnvironmentSteps;
+        } else {
+            m_Existential = 1f / MaxStep;
+        }
         m_BehaviorParameters = gameObject.GetComponent<BehaviorParameters>();
 
         if (m_BehaviorParameters.TeamId == (int)Team.Police) {
@@ -58,6 +64,7 @@ public class DorokAgent: Agent {
     */
     public override void CollectObservations(VectorSensor sensor) {
         // 自身の位置
+        //FIXME:NullReferenceException: Object reference not set to an instance of an object
         sensor.AddObservation(agentRb.velocity.x);
         sensor.AddObservation(agentRb.velocity.z);
 
@@ -82,7 +89,7 @@ public class DorokAgent: Agent {
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = actions[0];
         controlSignal.z = actions[1];
-        agentRb.AddForce(controlSignal * m_Settings.agentRunSpeed);
+        //agentRb.AddForce(controlSignal * m_Settings.agentRunSpeed);
 
         //敵エージェントとの距離を算出
         var tagname = team == Team.Police ? "Criminer" : "Police";
@@ -95,7 +102,7 @@ public class DorokAgent: Agent {
         
         //敵エージェントとの距離が近いほど報酬を与える
         AddReward(1f / distanceToEnemy);
-        //敵エージェントとの距離が遠いほど報酬を与える
+        //敵エージェントとの距離が遠いほどマイナス報酬を与える
         AddReward(-1f / distanceToEnemy);
         //警官が逃走役を捕まえたら報酬を与え,逃走役は報酬を引く。
         if (distanceToEnemy < 1f) {
