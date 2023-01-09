@@ -802,7 +802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5328072687207904485, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5476586957720946163, guid: bcfd47c70e5aa014fa5b1097ea5d49a3, type: 3}
       propertyPath: m_RootOrder

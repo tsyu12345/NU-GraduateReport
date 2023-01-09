@@ -55,14 +55,20 @@ public class DorokAgent: Agent {
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
 
-        print("Initialized Agent For Team: " + team + "");
+        print("Initialized one Agent For Team: " + team + "");
     }
+
+
 
 
     /**
     環境の観測
     */
     public override void CollectObservations(VectorSensor sensor) {
+        if(sensor is null) {
+            print("!!sensor is null!!");
+            return ;
+        }
         // 自身の位置
         //FIXME:NullReferenceException: Object reference not set to an instance of an object
         sensor.AddObservation(agentRb.velocity.x);
@@ -85,11 +91,10 @@ public class DorokAgent: Agent {
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
         //Action size is 2
-        var actions = actionBuffers.ContinuousActions;
         Vector3 controlSignal = Vector3.zero;
-        controlSignal.x = actions[0];
-        controlSignal.z = actions[1];
-        //agentRb.AddForce(controlSignal * m_Settings.agentRunSpeed);
+        controlSignal.x = actionBuffers.ContinuousActions[0];
+        controlSignal.z = actionBuffers.ContinuousActions[1];
+        agentRb.AddForce(controlSignal * 10);//agentRb.AddForce(controlSignal * m_Settings.agentRunSpeed);
 
         //敵エージェントとの距離を算出
         var tagname = team == Team.Police ? "Criminer" : "Police";
