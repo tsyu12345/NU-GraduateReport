@@ -16,6 +16,8 @@ public class DorokAgent: Agent {
     public Team team;
 
     float m_Existential;
+    float m_LateralSpeed;
+    float m_ForwardSpeed;
 
     [HideInInspector]
     public Rigidbody agentRb;
@@ -50,7 +52,12 @@ public class DorokAgent: Agent {
         }
 
         m_Settings = FindObjectOfType<DorokSettings>();
+        print("INIT M_SETTING" + m_Settings);
+        if(m_Settings == null) {
+            print("Failed to find DorokSettings");
+        }
         agentRb = GetComponent<Rigidbody>();
+        
         agentRb.maxAngularVelocity = 500;
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
@@ -65,12 +72,8 @@ public class DorokAgent: Agent {
     環境の観測
     */
     public override void CollectObservations(VectorSensor sensor) {
-        if(sensor is null) {
-            print("!!sensor is null!!");
-            return ;
-        }
+        
         // 自身の位置
-        //FIXME:NullReferenceException: Object reference not set to an instance of an object
         sensor.AddObservation(agentRb.velocity.x);
         sensor.AddObservation(agentRb.velocity.z);
 
@@ -86,15 +89,57 @@ public class DorokAgent: Agent {
     }
 
 
+    public void MoveAgent(ActionSegment<int> act) {
+        var dirToGo = Vector3.zero;
+        var rotateDir = Vector3.zero;
+
+        var forwardAxis = act[0];
+        var rightAxis = act[1];
+        var rotateAxis = act[2];
+
+        switch (forwardAxis)
+        {
+            case 1:
+                dirToGo = transform.forward * m_ForwardSpeed;
+                break;
+            case 2:
+                dirToGo = transform.forward * -m_ForwardSpeed;
+                break;
+        }
+
+        switch (rightAxis)
+        {
+            case 1:
+                dirToGo = transform.right * m_LateralSpeed;
+                break;
+            case 2:
+                dirToGo = transform.right * -m_LateralSpeed;
+                break;
+        }
+
+        switch (rotateAxis)
+        {
+            case 1:
+                rotateDir = transform.up * -1f;
+                break;
+            case 2:
+                rotateDir = transform.up * 1f;
+                break;
+        }
+
+        transform.Rotate(rotateDir, Time.deltaTime * 100f);
+        print("m_Settings" + m_Settings+ "");
+        print("ForceMode.VelocityChange" + ForceMode.VelocityChange+ "");
+        agentRb.AddForce(dirToGo * m_Settings.agentRunSpeed, ForceMode.VelocityChange);
+    }
+
+
     /**
     エージェントの行動による報酬の設定(報酬設計)
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
-        //Action size is 2
-        Vector3 controlSignal = Vector3.zero;
-        controlSignal.x = actionBuffers.ContinuousActions[0];
-        controlSignal.z = actionBuffers.ContinuousActions[1];
-        agentRb.AddForce(controlSignal * 10);//agentRb.AddForce(controlSignal * m_Settings.agentRunSpeed);
+
+        MoveAgent(actionBuffers.DiscreteActions);
 
         //敵エージェントとの距離を算出
         var tagname = team == Team.Police ? "Criminer" : "Police";
@@ -120,6 +165,7 @@ public class DorokAgent: Agent {
             }
             EndEpisode();
         }
+
 
     }
 
