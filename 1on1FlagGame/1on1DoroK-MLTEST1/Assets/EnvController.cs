@@ -75,15 +75,10 @@ public class EnvController : MonoBehaviour
     1マッチ終了時の報酬処理
     （逃走者が全員捕まるか、制限時間切れの場合）
     */
-    public void MatchEnd(Team team) {
-        if (team == Team.Police) {
-            PoliceGroup.AddGroupReward(1);
-            CriminerGroup.AddGroupReward(-1);
-        } else {
-            PoliceGroup.AddGroupReward(-1);
-            CriminerGroup.AddGroupReward(1);
-        }
-
+    public void MatchEnd() {
+        
+        //逃走者が全員捕まった場合,警察側に報酬を与える
+        
         PoliceGroup.GroupEpisodeInterrupted();
         CriminerGroup.GroupEpisodeInterrupted();
         ResetScene();

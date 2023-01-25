@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - criminer
   - Police
   - Criminer
+  - Prison
+  - criminer
   layers:
   - Default
   - TransparentFX
