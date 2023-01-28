@@ -139,7 +139,7 @@ public class DorokAgent: Agent {
     エージェントの行動による報酬の設定(報酬設計)
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
-
+        SetReword(1.0f);
         MoveAgent(actionBuffers.DiscreteActions);
         if(team == Team.Police) {
             onActionPolice(actionBuffers);
@@ -183,10 +183,6 @@ public class DorokAgent: Agent {
         float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         // 逃走役エージェントとの距離が近いほど報酬を与える
         AddReward(1 - distance/m_Settings.rewardConstant);
-        // 逃走役エージェントと接触した場合、捕まえたと判定し、報酬を与える
-        if (distance < 1.42f) {
-            AddReward(10.0f);
-        }
         EndEpisode();
 
     }
@@ -205,15 +201,40 @@ public class DorokAgent: Agent {
             float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
             // 警察エージェントとの距離が遠いほど報酬を与える
             AddReward(distance/m_Settings.rewardConstant);
-            // 警察エージェントと接触した場合、捕まえられたと判定し、負の報酬を与える
-            if (distance < 1.42f) {
-                AddReward(-10.0f);
-                isCaptured = true;
-                //エージェントを所定の牢屋位置に移動させる
-                //transform.position = prisonController.prisonPos;
-            }
-            //他の逃走役エージェントが捕まっていて、牢屋に接触した場合、仲間を解放し、報酬を与える
-            /*
+        }
+        EndEpisode();
+    }
+
+    /**
+     * 他のエージェントや壁などゲームオブジェクトとの接触時に呼び出されるハンドラ
+     */
+    void OnCollisionEnter(Collision c) {
+        if(team == Team.Police) {
+            onCollisionPolice(c);
+        } else {
+            onCollisionCriminer(c);
+        }
+    }
+
+    private void onCollisionPolice(Collision c) {
+        // 警察エージェントが逃走役エージェントと接触した場合、捕まえたと判定し、報酬を与える
+        if (c.gameObject.CompareTag("Criminer")) {
+            AddReward(10.0f);
+        }
+    }
+
+    private void onCollisionCriminer(Collision c) {
+        // 逃走役エージェントが警察エージェントと接触した場合、捕まえられたと判定し、負の報酬を与える
+        if (c.gameObject.CompareTag("Police")) {
+            AddReward(-10.0f);
+            isCaptured = true;
+            //エージェントを所定の牢屋位置に移動させる
+            //transform.position = prisonController.prisonPos;
+            EndEpisode();
+        }
+        // 逃走役エージェントが牢屋と接触した場合、仲間を解放し、報酬を与える
+        /*
+        if (c.gameObject.CompareTag("Prison")) {
             if(prisonController.capturedAgents.Length > 0) {
                 foreach (GameObject agent in prisonController.capturedAgents) {
                     float distanceToPrison = Vector3.Distance(transform.position, agent.transform.position);
@@ -224,13 +245,15 @@ public class DorokAgent: Agent {
                     }
                 }
             }
-            */
         }
-        EndEpisode();
+        */
     }
 
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
+
+    /**
+     * テスト用キーボード操作の受付
+     * */
+    public override void Heuristic(in ActionBuffers actionsOut) {
         var discreteActionsOut = actionsOut.DiscreteActions;
         //forward
         if (Input.GetKey(KeyCode.W))
