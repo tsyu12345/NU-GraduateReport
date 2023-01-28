@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6191740779564238203
+--- !u!1 &2422063579673770582
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,16 +8,17 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1539278084541274088}
-  - component: {fileID: 6036970250073040766}
-  - component: {fileID: 4079296834312838370}
-  - component: {fileID: 4238596743883397934}
-  - component: {fileID: 1113970839827931846}
-  - component: {fileID: 4093369590317185654}
-  - component: {fileID: 4093369590317185657}
-  - component: {fileID: 688972906520696938}
-  - component: {fileID: 5088790917581023690}
-  - component: {fileID: 3943828983348039372}
+  - component: {fileID: 7002257196600256709}
+  - component: {fileID: 2861543763184179283}
+  - component: {fileID: 5543100231088874447}
+  - component: {fileID: 5666403375582520323}
+  - component: {fileID: 8864209977660792299}
+  - component: {fileID: 5530155795508512091}
+  - component: {fileID: 5530155795508512084}
+  - component: {fileID: 9078737486232905543}
+  - component: {fileID: 3670041110262126311}
+  - component: {fileID: 4812893354582749665}
+  - component: {fileID: 8390661927229439803}
   m_Layer: 0
   m_Name: Police
   m_TagString: Police
@@ -25,36 +26,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1539278084541274088
+--- !u!4 &7002257196600256709
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
-  m_LocalRotation: {x: -1.5565282e-19, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.29, y: 0.56, z: 8.45}
+  m_GameObject: {fileID: 2422063579673770582}
+  m_LocalRotation: {x: -1.5565282e-19, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 19.33, y: -4.752, z: 2.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6036970250073040766
+--- !u!33 &2861543763184179283
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4079296834312838370
+--- !u!23 &5543100231088874447
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -90,56 +91,56 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4238596743883397934
+--- !u!135 &5666403375582520323
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1113970839827931846
+--- !u!54 &8864209977660792299
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 50
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &4093369590317185654
+  m_Constraints: 116
+  m_CollisionDetection: 1
+--- !u!114 &5530155795508512091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 2
-      BranchSizes: 01000000
+      m_NumContinuousActions: 1
+      BranchSizes: 030000000300000003000000
     VectorActionSize: 
     VectorActionDescriptions: []
-    VectorActionSpaceType: 0
+    VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
@@ -150,13 +151,13 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!114 &4093369590317185657
+--- !u!114 &5530155795508512084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
@@ -164,27 +165,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: PoliceRayPerceptionSensor
   m_DetectableTags:
-  - criminer
-  m_RaysPerDirection: 3
+  - Criminer
+  m_RaysPerDirection: 10
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
-  m_RayLength: 20
+  m_RayLength: 56
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 1
+  m_ObservationStacks: 3
   m_AlternatingRayOrder: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
---- !u!20 &688972906520696938
+--- !u!20 &9078737486232905543
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -221,13 +222,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &5088790917581023690
+--- !u!114 &3670041110262126311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce18a4948ca727b43a02d9643867afc7, type: 3}
@@ -241,17 +242,31 @@ MonoBehaviour:
   agentRb: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
---- !u!114 &3943828983348039372
+  isCaptured: 0
+--- !u!114 &4812893354582749665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191740779564238203}
+  m_GameObject: {fileID: 2422063579673770582}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 10
   TakeActionsBetweenDecisions: 1
+--- !u!114 &8390661927229439803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422063579673770582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a6da8f78a394c6ab027688eab81e04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugCommandLineOverride: 

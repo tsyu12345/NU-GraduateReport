@@ -26,13 +26,14 @@ public class DorokAgent: Agent {
     PrisonController prisonController;
 
     EnvironmentParameters m_ResetParams;
+    EnvController envController;
 
     /**
     エージェントの初期化
     */
     public override void Initialize() {
         
-        EnvController envController = GetComponentInParent<EnvController>();
+        envController = GetComponentInParent<EnvController>();
         if (envController != null) {
             m_Existential = 1f / envController.MaxEnvironmentSteps;
         } else {
@@ -59,40 +60,11 @@ public class DorokAgent: Agent {
 
         m_ForwardSpeed = m_Settings.agentForwardSpeed;
         m_LateralSpeed = m_Settings.agentLateralSpeed;
-        print("ForwardSpeed: " + m_ForwardSpeed + ", LateralSpeed: " + m_LateralSpeed + "");
-
-
         m_ResetParams = Academy.Instance.EnvironmentParameters;
 
         //牢屋のインスタンスを取得
-        //prisonController = GameObject.Find("Prison").GetComponent<PrisonController>();
+        prisonController = GameObject.Find("Prison").GetComponent<PrisonController>();    }
 
-        print("Initialized one Agent For Team: " + team + "");
-    }
-
-
-
-
-    /**
-    環境の観測
-    */
-    public override void CollectObservations(VectorSensor sensor) {
-        
-        // 自身の位置
-        sensor.AddObservation(agentRb.velocity.x);
-        sensor.AddObservation(agentRb.velocity.z);
-
-        // 敵エージェントの位置
-        var tagname = team == Team.Police ? "Criminer" : "Police";
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag(tagname);
-        print("Enemys: " + enemys.Length);
-
-        foreach(GameObject enemy in enemys) {
-            sensor.AddObservation(enemy.transform.position.x);
-            sensor.AddObservation(enemy.transform.position.z);
-        }
-
-    }
 
 
     public void MoveAgent(ActionSegment<int> act) {
@@ -140,12 +112,17 @@ public class DorokAgent: Agent {
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
         SetReward(1.0f);
-        MoveAgent(actionBuffers.DiscreteActions);
+        //エージェントの位置があまり動いていない場合は報酬を減らす
+        if (agentRb.velocity.magnitude < 1.0f) {
+            AddReward(-0.1f);
+        }
         if(team == Team.Police) {
             onActionPolice(actionBuffers);
         } else {
             onActionCriminer(actionBuffers);
-        } 
+        }
+        MoveAgent(actionBuffers.DiscreteActions); 
+        EndEpisode();
         
     }
 
@@ -183,7 +160,6 @@ public class DorokAgent: Agent {
         float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         // 逃走役エージェントとの距離が近いほど報酬を与える
         AddReward(1 - distance/m_Settings.rewardConstant);
-        EndEpisode();
 
     }
 
@@ -202,7 +178,6 @@ public class DorokAgent: Agent {
             // 警察エージェントとの距離が遠いほど報酬を与える
             AddReward(distance/m_Settings.rewardConstant);
         }
-        EndEpisode();
     }
 
     /**
@@ -214,12 +189,14 @@ public class DorokAgent: Agent {
         } else {
             onCollisionCriminer(c);
         }
+        envController.onGameEnd(team);
     }
 
     private void onCollisionPolice(Collision c) {
         // 警察エージェントが逃走役エージェントと接触した場合、捕まえたと判定し、報酬を与える
         if (c.gameObject.CompareTag("Criminer")) {
             AddReward(10.0f);
+            EndEpisode();
         }
     }
 

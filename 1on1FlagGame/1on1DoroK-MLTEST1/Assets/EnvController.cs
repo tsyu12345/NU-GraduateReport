@@ -30,21 +30,20 @@ public class EnvController : MonoBehaviour
 
     private int m_ResetTimer;
 
+    //牢屋オブジェクト
+    public PrisonController Prison;
+
     [Tooltip("Max Environment Steps")] public int MaxEnvironmentSteps = 25000;
     
     void Start() {
         var PoliceCount = 0;
         var CriminerCount = 0;
-        print("TEAM OBJ");
-        print(Team.Police);
         m_DorokSettings = FindObjectOfType<DorokSettings>();
+        Prison = FindObjectOfType<PrisonController>();
         // Initialize TeamManager
         PoliceGroup = new SimpleMultiAgentGroup();
         CriminerGroup = new SimpleMultiAgentGroup();
-        print("AgentsList Count: ");
-        print(AgentsList);
         foreach (var item in AgentsList) {
-            print("for statemaents");
             item.StartingPos = item.Agent.transform.position;
             item.StartingRot = item.Agent.transform.rotation;
             item.Rb = item.Agent.GetComponent<Rigidbody>();
@@ -56,9 +55,7 @@ public class EnvController : MonoBehaviour
                 CriminerCount++;
             }
         }
-        print("TeamManager Initialized");
-        print("PoliceGroup: " + PoliceCount + " Agents");
-        print("CriminerGroup: " + CriminerCount + " Agents");
+        ResetScene();
     }
 
 
@@ -72,15 +69,20 @@ public class EnvController : MonoBehaviour
     }
 
     /**
-    1マッチ終了時の報酬処理
-    （逃走者が全員捕まるか、制限時間切れの場合）
+    * 1ゲーム終了時に呼び出される
     */
-    public void MatchEnd() {
-        
-        //逃走者が全員捕まった場合,警察側に報酬を与える
-        
-        PoliceGroup.GroupEpisodeInterrupted();
-        CriminerGroup.GroupEpisodeInterrupted();
+    public void onGameEnd(Team team) {
+        if (team == Team.Police) {
+            //牢屋にとらえている犯人役の人数分だけ報酬を与える
+            int count = Prison.GetCapturedAgents().Count;
+            PoliceGroup.AddGroupReward(count);
+        } else {
+            //牢屋にとらえている犯人役の人数分だけ報酬を減らす
+            int count = Prison.GetCapturedAgents().Count;
+            CriminerGroup.AddGroupReward(-count);
+        }
+        PoliceGroup.EndGroupEpisode();
+        CriminerGroup.EndGroupEpisode();
         ResetScene();
     }
 
@@ -95,7 +97,6 @@ public class EnvController : MonoBehaviour
             var rot = item.Agent.rotSign * Random.Range(80.0f, 100.0f);
             var newRot = Quaternion.Euler(0, rot, 0);
             item.Agent.transform.SetPositionAndRotation(newStartPos, newRot);
-
             item.Rb.velocity = Vector3.zero;
             item.Rb.angularVelocity = Vector3.zero;
         }

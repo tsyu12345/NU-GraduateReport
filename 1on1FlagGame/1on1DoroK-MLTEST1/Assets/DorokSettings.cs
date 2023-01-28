@@ -5,7 +5,7 @@ public class DorokSettings : MonoBehaviour {
     public float agentRunSpeed;
     public float agentForwardSpeed;
     public float agentLateralSpeed;
-    public float rewardConstant = 20.0f;
+    public float rewardConstant;
 }
 
 public enum Team {

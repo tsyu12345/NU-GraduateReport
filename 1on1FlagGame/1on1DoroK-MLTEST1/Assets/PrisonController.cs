@@ -24,7 +24,7 @@ public class PrisonController : MonoBehaviour {
     /**
     * 捕らわれている逃走役エージェントを取得
     */
-    private List<GameObject> GetCapturedAgents() {
+    public List<GameObject> GetCapturedAgents() {
         List<GameObject> capturedAgents = new List<GameObject>();
         foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Criminer")) {
             if (agent.GetComponent<DorokAgent>().isCaptured) {
