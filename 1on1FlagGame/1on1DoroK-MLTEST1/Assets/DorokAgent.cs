@@ -139,7 +139,7 @@ public class DorokAgent: Agent {
     エージェントの行動による報酬の設定(報酬設計)
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
-        SetReword(1.0f);
+        SetReward(1.0f);
         MoveAgent(actionBuffers.DiscreteActions);
         if(team == Team.Police) {
             onActionPolice(actionBuffers);
