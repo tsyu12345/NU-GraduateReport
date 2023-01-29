@@ -83,7 +83,7 @@ public class EnvController : MonoBehaviour
             float reward = count / CriminerCount;
             CriminerGroup.AddGroupReward(-reward);
             //捕まった逃走者をグループから外す
-            CriminerGroup.UnregisterAgent(capturedAgent);
+            //CriminerGroup.UnregisterAgent(capturedAgent);
             CriminerGroup.EndGroupEpisode();
         }
         //生き残っている逃走者の数がいない場合、シーンをリセットする
@@ -141,7 +141,7 @@ public class EnvController : MonoBehaviour
         foreach (GameObject agent in capturedAgents) {
             agent.GetComponent<DorokAgent>().isCaptured = false;
             //エージェントを再登録
-            CriminerGroup.RegisterAgent(agent.GetComponent<DorokAgent>());
+            //CriminerGroup.RegisterAgent(agent.GetComponent<DorokAgent>());
             //属するフィールドのランダムな位置に移動
             //TODO: ここでフィールドの範囲を取得して、そこからランダムに位置を決める
             var randomPosX = Random.Range(-5f, 5f);
