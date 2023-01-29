@@ -224,6 +224,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 925339729}
     m_Modifications:
+    - target: {fileID: 2351626893321316825, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 2023560927}
     - target: {fileID: 3733720748035966312, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
       propertyPath: m_Name
       value: Police3-1
@@ -320,7 +324,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 925339729}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!108 &163615895
 Light:
@@ -826,6 +830,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 676371313}
     m_Modifications:
+    - target: {fileID: 2351626893321316825, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1043698804}
     - target: {fileID: 3733720748035966312, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
       propertyPath: m_Name
       value: Police2-2
@@ -1153,15 +1161,7 @@ MonoBehaviour:
     StartingPos: {x: 0, y: 0, z: 0}
     StartingRot: {x: 0, y: 0, z: 0, w: 0}
     Rb: {fileID: 0}
-  - Agent: {fileID: 0}
-    StartingPos: {x: 0, y: 0, z: 0}
-    StartingRot: {x: 0, y: 0, z: 0, w: 0}
-    Rb: {fileID: 0}
   - Agent: {fileID: 155644902}
-    StartingPos: {x: 0, y: 0, z: 0}
-    StartingRot: {x: 0, y: 0, z: 0, w: 0}
-    Rb: {fileID: 0}
-  - Agent: {fileID: 0}
     StartingPos: {x: 0, y: 0, z: 0}
     StartingRot: {x: 0, y: 0, z: 0, w: 0}
     Rb: {fileID: 0}
@@ -1185,8 +1185,8 @@ Transform:
   - {fileID: 1444005229}
   - {fileID: 1185546370}
   - {fileID: 1168199838}
-  - {fileID: 155644903}
   - {fileID: 163615894}
+  - {fileID: 155644903}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1339,6 +1339,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5658631945404467409, guid: b421886e20948884aae0c6b29d204940, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1043698804}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b421886e20948884aae0c6b29d204940, type: 3}
 --- !u!114 &995756697 stripped
@@ -1594,6 +1598,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5658631945404467409, guid: b421886e20948884aae0c6b29d204940, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1130999077}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b421886e20948884aae0c6b29d204940, type: 3}
 --- !u!114 &1135957836 stripped
@@ -1667,6 +1675,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5658631945404467409, guid: b421886e20948884aae0c6b29d204940, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 2023560927}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b421886e20948884aae0c6b29d204940, type: 3}
 --- !u!114 &1168199837 stripped
@@ -2406,6 +2418,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5658631945404467409, guid: b421886e20948884aae0c6b29d204940, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1043698804}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b421886e20948884aae0c6b29d204940, type: 3}
 --- !u!114 &1674279139 stripped
@@ -2710,6 +2726,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 676371313}
     m_Modifications:
+    - target: {fileID: 2351626893321316825, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1043698804}
     - target: {fileID: 3733720748035966312, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
       propertyPath: m_Name
       value: Police2-1
@@ -2783,6 +2803,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1021618441}
     m_Modifications:
+    - target: {fileID: 2351626893321316825, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1130999077}
     - target: {fileID: 3733720748035966312, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
       propertyPath: m_Name
       value: Police1-2
@@ -2964,6 +2988,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1021618441}
     m_Modifications:
+    - target: {fileID: 2351626893321316825, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1130999077}
     - target: {fileID: 3733720748035966312, guid: 693beda3151fefe44816422c536ae0ca, type: 3}
       propertyPath: m_Name
       value: Police1-1
@@ -3069,6 +3097,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5658631945404467409, guid: b421886e20948884aae0c6b29d204940, type: 3}
+      propertyPath: prisonArea
+      value: 
+      objectReference: {fileID: 1130999077}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b421886e20948884aae0c6b29d204940, type: 3}
 --- !u!4 &6363588617501081934 stripped

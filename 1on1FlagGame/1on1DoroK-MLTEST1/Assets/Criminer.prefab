@@ -155,7 +155,8 @@ MonoBehaviour:
   agentRb: {fileID: 1113970839827931846, guid: 33af018fe9abbae4fa23abad7e360a66, type: 3}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
-  isCaptured: 1
+  isCaptured: 0
+  prisonArea: {fileID: 3017807615762775812, guid: 85f239f4a25ddd441ba64358bc864f46, type: 3}
 --- !u!54 &3167516918973074138
 Rigidbody:
   m_ObjectHideFlags: 0
