@@ -188,6 +188,8 @@ MonoBehaviour:
   m_SensorName: CriminerRayPerceptionSensor
   m_DetectableTags:
   - Police
+  - Criminer
+  - Prison
   m_RaysPerDirection: 10
   m_MaxRayDegrees: 76.9
   m_SphereCastRadius: 0.5

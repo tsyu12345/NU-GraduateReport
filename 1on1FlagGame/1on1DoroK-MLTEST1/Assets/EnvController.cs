@@ -121,14 +121,16 @@ public class EnvController : MonoBehaviour
         return capturedAgents;
     }
 
-
+    
     public List<GameObject> GetFreeCriminers() {
         List<GameObject> freeCriminers = new List<GameObject>();
+        //フィールド内の逃走者のリストを取得
         foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Criminer")) {
-            if (agent.GetComponent<DorokAgent>().isCaptured == false) {
+            if (!agent.GetComponent<DorokAgent>().isCaptured) {
                 freeCriminers.Add(agent);
             }
         }
+        
         return freeCriminers;
     }
 
