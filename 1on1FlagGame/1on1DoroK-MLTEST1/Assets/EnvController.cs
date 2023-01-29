@@ -73,13 +73,13 @@ public class EnvController : MonoBehaviour
             //牢屋にとらえている犯人役の人数分だけ報酬を与える
             int count = GetCapturedAgents().Count;
             PoliceGroup.AddGroupReward(count);
+            PoliceGroup.GroupEpisodeInterrupted();
         } else {
             //牢屋にとらえている犯人役の人数分だけ報酬を減らす
             int count = GetCapturedAgents().Count;
             CriminerGroup.AddGroupReward(-count);
+            CriminerGroup.EndGroupEpisode();
         }
-        PoliceGroup.EndGroupEpisode();
-        CriminerGroup.EndGroupEpisode();
         //生き残っている逃走者の数がいない場合、シーンをリセットする
         List<GameObject> survivers = GetFreeCriminers();
         if(survivers.Count == 0) {
@@ -90,9 +90,14 @@ public class EnvController : MonoBehaviour
 
     public void onTimeUp() {
         //捕まっていない逃走者の分だけ負の報酬を与える
-        int count = GetFreeCriminers().Count;
-        PoliceGroup.AddGroupReward(-count);
-        CriminerGroup.AddGroupReward(count);
+        int freeCount = GetFreeCriminers().Count;
+        PoliceGroup.SetGroupReward(1-freeCount);
+        CriminerGroup.SetGroupReward(freeCount - 1);
+        int caughtCount = GetCapturedAgents().Count;
+        PoliceGroup.AddGroupReward(caughtCount);
+        CriminerGroup.AddGroupReward(-caughtCount);
+        PoliceGroup.GroupEpisodeInterrupted();
+        CriminerGroup.GroupEpisodeInterrupted();
     }
 
 

@@ -28,11 +28,11 @@ public class DorokAgent: Agent {
     EnvironmentParameters m_ResetParams;
     EnvController envController;
 
+
     /**
     エージェントの初期化
     */
     public override void Initialize() {
-        
         envController = GetComponentInParent<EnvController>();
         if (envController != null) {
             m_Existential = 1f / envController.MaxEnvironmentSteps;
@@ -106,15 +106,15 @@ public class DorokAgent: Agent {
     }
 
 
+    public override void CollectObservations(VectorSensor sensor) {
+    }
+
+
     /**
     エージェントの行動による報酬の設定(報酬設計)
     */
     public override void OnActionReceived(ActionBuffers actionBuffers) {
         SetReward(1.0f);
-        //エージェントの位置があまり動いていない場合は報酬を減らす
-        if (agentRb.velocity.magnitude < 1.0f) {
-            AddReward(-0.1f);
-        }
         if(team == Team.Police) {
             onActionPolice(actionBuffers);
         } else {
@@ -154,11 +154,20 @@ public class DorokAgent: Agent {
     * 警察エージェントの報酬設計
     */
     private void onActionPolice(ActionBuffers actionBuffers) {
+
+        //AI自身が逃走者を検出しているかで報酬を与える場合
+        
+
         GameObject[] enemys = GetEnemies(team);
         GameObject nearestEnemy = GetNearestEnemy(enemys);
         float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         // 逃走役エージェントとの距離が近いほど報酬を与える
-        AddReward(1 - distance/m_Settings.rewardConstant);
+        if(distance < 1.42f) {
+            AddReward(1.0f);
+        } else {
+            AddReward(-1.0f);
+        }
+
     }
 
     /**
@@ -170,6 +179,15 @@ public class DorokAgent: Agent {
             agentRb.velocity = Vector3.zero;
             AddReward(-1.0f);
         } else {
+            //AI自身が逃走者を検出しているかで報酬を与える場合
+            /*
+            if(target != null) {
+                print("Detected Police!!");
+                AddReward(2.0f);
+            } else {
+                print("None of Detected");
+            }
+            */
             GameObject[] enemys = GetEnemies(team);
             GameObject nearestEnemy = GetNearestEnemy(enemys);
             float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
@@ -195,7 +213,7 @@ public class DorokAgent: Agent {
         // 警察エージェントが逃走役エージェントと接触した場合、捕まえたと判定し、報酬を与える
         if (c.gameObject.CompareTag("Criminer")) {
             print("onCollisionPolice: Catch Criminer");
-            AddReward(10.0f);
+            AddReward(5.0f);
         }
     }
 
