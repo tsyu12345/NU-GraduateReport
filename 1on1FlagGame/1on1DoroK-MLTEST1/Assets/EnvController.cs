@@ -30,16 +30,12 @@ public class EnvController : MonoBehaviour
 
     private int m_ResetTimer;
 
-    //牢屋オブジェクト
-    public PrisonController Prison;
-
     [Tooltip("Max Environment Steps")] public int MaxEnvironmentSteps = 25000;
     
     void Start() {
         var PoliceCount = 0;
         var CriminerCount = 0;
         m_DorokSettings = FindObjectOfType<DorokSettings>();
-        Prison = FindObjectOfType<PrisonController>();
         // Initialize TeamManager
         PoliceGroup = new SimpleMultiAgentGroup();
         CriminerGroup = new SimpleMultiAgentGroup();
@@ -64,6 +60,7 @@ public class EnvController : MonoBehaviour
         if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0) {
             PoliceGroup.GroupEpisodeInterrupted();
             CriminerGroup.GroupEpisodeInterrupted();
+            onTimeUp();
             ResetScene();
         }
     }
@@ -74,16 +71,64 @@ public class EnvController : MonoBehaviour
     public void onCaught(Team team) {
         if (team == Team.Police) {
             //牢屋にとらえている犯人役の人数分だけ報酬を与える
-            int count = Prison.GetCapturedAgents().Count;
+            int count = GetCapturedAgents().Count;
             PoliceGroup.AddGroupReward(count);
         } else {
             //牢屋にとらえている犯人役の人数分だけ報酬を減らす
-            int count = Prison.GetCapturedAgents().Count;
+            int count = GetCapturedAgents().Count;
             CriminerGroup.AddGroupReward(-count);
         }
         PoliceGroup.EndGroupEpisode();
         CriminerGroup.EndGroupEpisode();
-        ResetScene();
+        //生き残っている逃走者の数がいない場合、シーンをリセットする
+        List<GameObject> survivers = GetFreeCriminers();
+        if(survivers.Count == 0) {
+            ResetScene();
+        }
+    }
+
+
+    public void onTimeUp() {
+        //捕まっていない逃走者の分だけ負の報酬を与える
+        int count = GetFreeCriminers().Count;
+        PoliceGroup.AddGroupReward(-count);
+        CriminerGroup.AddGroupReward(count);
+    }
+
+
+    /**
+    * 捕らわれている逃走役エージェントを取得
+    */
+    public List<GameObject> GetCapturedAgents() {
+        List<GameObject> capturedAgents = new List<GameObject>();
+        foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Criminer")) {
+            if (agent.GetComponent<DorokAgent>().isCaptured) {
+                capturedAgents.Add(agent);
+            }
+        }
+        print("PrisonController: capturedAgents.Count = " + capturedAgents.Count);
+        return capturedAgents;
+    }
+
+
+    public List<GameObject> GetFreeCriminers() {
+        List<GameObject> freeCriminers = new List<GameObject>();
+        foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Criminer")) {
+            if (agent.GetComponent<DorokAgent>().isCaptured == false) {
+                freeCriminers.Add(agent);
+            }
+        }
+        return freeCriminers;
+    }
+
+    /**
+    * 捕らわれている逃走役エージェントを牢屋からランダムにフィールドに開放する
+    */
+    public void ReleaseCapturedAgents(List<GameObject> capturedAgents) {
+        foreach (GameObject agent in capturedAgents) {
+            agent.GetComponent<DorokAgent>().isCaptured = false;
+            agent.transform.position = new Vector3(Random.Range(-5.0f, 5.0f), 0.5f, Random.Range(-5.0f, 5.0f));
+        }
     }
 
 
@@ -99,6 +144,12 @@ public class EnvController : MonoBehaviour
             item.Agent.transform.SetPositionAndRotation(newStartPos, newRot);
             item.Rb.velocity = Vector3.zero;
             item.Rb.angularVelocity = Vector3.zero;
+        }
+        //捕まっているフラグを戻す
+        foreach (GameObject agent in GameObject.FindGameObjectsWithTag("Criminer")) {
+            if (agent.GetComponent<DorokAgent>().isCaptured) {
+                agent.GetComponent<DorokAgent>().isCaptured = false;
+            }
         }
     }
 }

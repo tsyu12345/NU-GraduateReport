@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -23,7 +24,6 @@ public class DorokAgent: Agent {
 
     //捕らわれているかどうか
     public bool isCaptured = false;
-    PrisonController prisonController;
 
     EnvironmentParameters m_ResetParams;
     EnvController envController;
@@ -62,8 +62,6 @@ public class DorokAgent: Agent {
         m_LateralSpeed = m_Settings.agentLateralSpeed;
         m_ResetParams = Academy.Instance.EnvironmentParameters;
 
-        //牢屋のインスタンスを取得
-        prisonController = gameObject.GetComponent<PrisonController>();    
     }
 
 
@@ -189,12 +187,11 @@ public class DorokAgent: Agent {
         } else {
             onCollisionCriminer(c);
         }
-        envController.onGameEnd(team);
+        //envController.onGameEnd(team);
         EndEpisode();
     }
 
     private void onCollisionPolice(Collision c) {
-        print("onCollisionPolice");
         // 警察エージェントが逃走役エージェントと接触した場合、捕まえたと判定し、報酬を与える
         if (c.gameObject.CompareTag("Criminer")) {
             print("onCollisionPolice: Catch Criminer");
@@ -203,7 +200,6 @@ public class DorokAgent: Agent {
     }
 
     private void onCollisionCriminer(Collision c) {
-        print("onCollisionCriminer");
         //捕まっている場合、牢屋の位置から動かないようにする
         if(isCaptured) {
             agentRb.velocity = Vector3.zero;
@@ -215,15 +211,16 @@ public class DorokAgent: Agent {
             isCaptured = true;
             //エージェントを所定の牢屋位置に移動させた後、エージェントの動きを止める
             //FIXME:牢屋の位置へ移動しない、prisonController is null
-            transform.position = prisonController.prisonPos;
+            transform.position = m_Settings.prisonPos;
             agentRb.velocity = Vector3.zero;
-            m_EnvController.onCaught();
+            envController.onCaught(team);
         }
         // 逃走役エージェントが牢屋にいる他の逃走者と接触した場合、報酬を与え、接触した他の逃走者を解放する
         if (c.gameObject.CompareTag("Criminer") && c.gameObject.GetComponent<DorokAgent>().isCaptured) {
             AddReward(10.0f);
             c.gameObject.GetComponent<DorokAgent>().isCaptured = false;
-            prisonController.ReleaseCapturedAgents(team);
+            List<GameObject> capturedAgents = envController.GetCapturedAgents();
+            envController.ReleaseCapturedAgents(capturedAgents);
         }
     }
 

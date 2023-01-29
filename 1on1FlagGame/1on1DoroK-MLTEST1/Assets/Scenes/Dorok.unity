@@ -354,6 +354,7 @@ MonoBehaviour:
   agentForwardSpeed: 2
   agentLateralSpeed: 2
   rewardConstant: 1.42
+  prisonPos: {x: 48.48, y: -5.735, z: 43.47}
 --- !u!4 &899765140
 Transform:
   m_ObjectHideFlags: 0
@@ -483,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3017807615762775812, guid: 85f239f4a25ddd441ba64358bc864f46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.63
+      value: -5.735
       objectReference: {fileID: 0}
     - target: {fileID: 3017807615762775812, guid: 85f239f4a25ddd441ba64358bc864f46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -565,7 +566,6 @@ MonoBehaviour:
     StartingPos: {x: 0, y: 0, z: 0}
     StartingRot: {x: 0, y: 0, z: 0, w: 0}
     Rb: {fileID: 0}
-  Prison: {fileID: 1130999078}
   MaxEnvironmentSteps: 25000
 --- !u!4 &1021618441
 Transform:
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130999076}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbcdc9c2aa3eaf84c9dfb4aae946b2bc, type: 3}
   m_Name: 
@@ -642,13 +642,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Criminer
       objectReference: {fileID: 0}
+    - target: {fileID: 5206574036134512812, guid: 5d5a9a68d509cae49a66ed0c03f8c758, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8850290593895417182, guid: 5d5a9a68d509cae49a66ed0c03f8c758, type: 3}
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8850290593895417182, guid: 5d5a9a68d509cae49a66ed0c03f8c758, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.08
+      value: 32.36
       objectReference: {fileID: 0}
     - target: {fileID: 8850290593895417182, guid: 5d5a9a68d509cae49a66ed0c03f8c758, type: 3}
       propertyPath: m_LocalPosition.y
@@ -656,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8850290593895417182, guid: 5d5a9a68d509cae49a66ed0c03f8c758, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17
+      value: 33.59
       objectReference: {fileID: 0}
     - target: {fileID: 8850290593895417182, guid: 5d5a9a68d509cae49a66ed0c03f8c758, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1004,6 +1008,10 @@ PrefabInstance:
     - target: {fileID: 2422063579673770582, guid: c9f55c9c60104944d91806d300bbc031, type: 3}
       propertyPath: m_Name
       value: Police
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530155795508512091, guid: c9f55c9c60104944d91806d300bbc031, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7002257196600256709, guid: c9f55c9c60104944d91806d300bbc031, type: 3}
       propertyPath: m_RootOrder
