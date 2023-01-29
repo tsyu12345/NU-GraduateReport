@@ -69,9 +69,9 @@ public class EnvController : MonoBehaviour
     }
 
     /**
-    * 1ゲーム終了時に呼び出される
+    * 
     */
-    public void onGameEnd(Team team) {
+    public void onCaught(Team team) {
         if (team == Team.Police) {
             //牢屋にとらえている犯人役の人数分だけ報酬を与える
             int count = Prison.GetCapturedAgents().Count;
@@ -89,7 +89,7 @@ public class EnvController : MonoBehaviour
 
     public void ResetScene() {
         m_ResetTimer = 0;
-
+        print("ResetScene");
         //Reset Agents
         foreach (var item in AgentsList) {
             var randomPosX = Random.Range(-5f, 5f);
