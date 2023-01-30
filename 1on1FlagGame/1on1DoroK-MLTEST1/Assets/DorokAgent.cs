@@ -166,7 +166,7 @@ public class DorokAgent: Agent {
         if(distance < 1.42f) {
             AddReward(1.0f);
         } else {
-            AddReward(-1.0f);
+            AddReward(-0.2f);
         }
 
     }
@@ -218,7 +218,7 @@ public class DorokAgent: Agent {
         // 警察エージェントが逃走役エージェントと接触した場合、捕まえたと判定し、報酬を与える
         if (c.gameObject.CompareTag("Criminer")) {
             print("onCollisionPolice: Catch Criminer");
-            AddReward(1.0f);
+            AddReward(5.0f);
         }
     }
 
@@ -235,6 +235,8 @@ public class DorokAgent: Agent {
             //エージェントを所定の牢屋位置に移動させた後、エージェントの動きを止める
             //FIXME:牢屋の位置へ移動しない
             transform.position = prisonArea.transform.position;
+            //この時床に埋まってしまうので、エージェントの底面を牢屋の底面に合わせる
+            transform.position = new Vector3(transform.position.x, prisonArea.transform.position.y + 0.5f, transform.position.z);
             agentRb.velocity = Vector3.zero;
             //自分自身を牢屋に入れる
             envController.onCaught(team, this);
