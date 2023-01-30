@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1671377537",
+        "python_version": "3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "F:\\Products\\GraduateReport2\\.venv\\Scripts\\mlagents-learn .\\config\\RunnerConfig.yaml --run-id=1on1Test1-Runner --force",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.13.0+cu117",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1671377539"
+    },
+    "total": 2.7054698000000004,
+    "count": 1,
+    "self": 0.005687700000000184,
+    "children": {
+        "run_training.setup": {
+            "total": 0.13136910000000013,
+            "count": 1,
+            "self": 0.13136910000000013
+        },
+        "TrainerController.start_learning": {
+            "total": 2.568413,
+            "count": 1,
+            "self": 0.00014039999999937436,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 2.5682569,
+                    "count": 1,
+                    "self": 2.5682569
+                },
+                "TrainerController._save_models": {
+                    "total": 1.5700000000506975e-05,
+                    "count": 1,
+                    "self": 1.5700000000506975e-05
+                }
+            }
+        }
+    }
+}
